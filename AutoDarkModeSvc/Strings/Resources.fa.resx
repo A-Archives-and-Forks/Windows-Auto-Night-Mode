@@ -142,76 +142,76 @@
     <value>روشن</value>
   </data>
   <data name="Msg_PauseActionDisableQuestion" xml:space="preserve">
-    <value>Would you like to disable auto switching instead?</value>
+    <value>می‌خواهید به جای آن جا‌به‌جایی خودکار را غیرفعال کنید؟</value>
   </data>
   <data name="Msg_PauseActionNotification" xml:space="preserve">
-    <value>Automatic switching will also resume if you return to your previous theme.</value>
+    <value>اگر به پوسته قبلی برگردید، جا‌به‌جایی خودکار ادامه خواهد یافت.</value>
   </data>
   <data name="Msg_PauseHeader" xml:space="preserve">
-    <value>Theme switching paused until</value>
+    <value>توقف جا‌به‌جایی پوسته تا...</value>
   </data>
   <data name="Msg_PauseOnce" xml:space="preserve">
-    <value>Theme switching is paused once!</value>
+    <value>جا‌به‌جایی پوسته برای یک نوبت متوقف شده است!</value>
   </data>
   <data name="Msg_PendingQuestion" xml:space="preserve">
-    <value>Would you like to switch now or delay further?</value>
+    <value>می‌خواهید الآن جا‌به‌جا شوید یا آن را به تعویق می‌اندازید؟</value>
   </data>
   <data name="Msg_ResumeHeader" xml:space="preserve">
-    <value>Auto theme switching resumed</value>
+    <value>جابه‌جایی خودکار پوسته از سر گرفته شد</value>
   </data>
   <data name="Msg_SwitchPending" xml:space="preserve">
-    <value>Theme switch pending</value>
+    <value>منتظر جابه‌جایی پوسته</value>
   </data>
   <data name="Paused" xml:space="preserve">
-    <value>Paused</value>
+    <value>متوقف شده</value>
   </data>
   <data name="PostponeTime_120" xml:space="preserve">
-    <value>2 hours</value>
+    <value>۲ ساعت</value>
   </data>
   <data name="PostponeTime_15" xml:space="preserve">
-    <value>15 minutes</value>
+    <value>۱۵ دقیقه</value>
   </data>
   <data name="PostponeTime_180" xml:space="preserve">
-    <value>3 hours</value>
+    <value>۳ ساعت</value>
   </data>
   <data name="PostponeTime_30" xml:space="preserve">
-    <value>30 minutes</value>
+    <value>۳۰ دقیقه</value>
   </data>
   <data name="PostponeTime_360" xml:space="preserve">
-    <value>6 hours</value>
+    <value>۶ ساعت</value>
   </data>
   <data name="PostponeTime_60" xml:space="preserve">
-    <value>1 hour</value>
+    <value>۱ ساعت</value>
   </data>
   <data name="PostponeTime_720" xml:space="preserve">
-    <value>12 hours</value>
+    <value>۱۲ ساعت</value>
   </data>
   <data name="RequestSwitchAction" xml:space="preserve">
-    <value>Hit confirm to request a theme switch immediately.</value>
+    <value>برای جابه‌جایی فوری پوسته تأیید را بزنید.</value>
   </data>
   <data name="RevertAction" xml:space="preserve">
-    <value>Revert this action by clicking on the undo button below.</value>
+    <value>با کلیک بر روی کلید واگرد در پایین، این عمل را لغو کنید.</value>
   </data>
   <data name="SwitchNow" xml:space="preserve">
-    <value>Switch now</value>
+    <value>همین الآن جابه‌جا شود</value>
   </data>
   <data name="TrayMenuItem_AutomaticThemeSwitch" xml:space="preserve">
-    <value>&amp;Automatic theme switch</value>
+    <value>تغییر پوسته &amp;خودکار</value>
   </data>
   <data name="TrayMenuItem_Close" xml:space="preserve">
     <value>و بستن</value>
   </data>
   <data name="TrayMenuItem_ForceDarkTheme" xml:space="preserve">
-    <value>Force &amp;Dark Theme</value>
+    <value>اجبار به پوسته &amp;تاریک</value>
   </data>
   <data name="TrayMenuItem_ForceLightTheme" xml:space="preserve">
-    <value>Force &amp;Light Theme</value>
+    <value>اجبار به پوسته &amp;روشن</value>
   </data>
   <data name="TrayMenuItem_OpenConfigDir" xml:space="preserve">
-    <value>&amp;Open Config Directory</value>
+    <value>&amp;بازکردن مسیر پیکره‌بندی</value>
   </data>
   <data name="TrayMenuItem_ThemeSwitchPause" xml:space="preserve">
-    <value>&amp;Pause auto switch</value>
+    <value>&amp;توقف جابه‌جایی خودکار</value>
   </data>
   <data name="TrayMenuItem_ToggleTheme" xml:space="preserve">
     <value>&amp;Toggle theme</value>
@@ -220,16 +220,16 @@
     <value>Try to fix the theme</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>واگرد</value>
   </data>
   <data name="Until" xml:space="preserve">
-    <value>until</value>
+    <value>تا</value>
   </data>
   <data name="UntilSunrise" xml:space="preserve">
-    <value>until next sunrise</value>
+    <value>تا طلوع بعدی خورشید</value>
   </data>
   <data name="UntilSunset" xml:space="preserve">
-    <value>until next sunset</value>
+    <value>تا غروب بعدی خورشید</value>
   </data>
   <data name="UpdateToast_AnErrorOccuredPatching" xml:space="preserve">
     <value>An error occurred while patching.</value>
@@ -238,16 +238,16 @@
     <value>Downgrade</value>
   </data>
   <data name="UpdateToast_ButtonOpenLogDirectory" xml:space="preserve">
-    <value>Open log directory</value>
+    <value>بازکردن مسیر لاگ</value>
   </data>
   <data name="UpdateToast_ButtonPostpone" xml:space="preserve">
-    <value>Postpone</value>
+    <value>به تعویق انداختن</value>
   </data>
   <data name="UpdateToast_ButtonUpdate" xml:space="preserve">
-    <value>Update</value>
+    <value>بروزرسانی</value>
   </data>
   <data name="UpdateToast_CurrentVersion" xml:space="preserve">
-    <value>Current Version</value>
+    <value>نسخه کنونی</value>
   </data>
   <data name="UpdateToast_DowngradeAvailable" xml:space="preserve">
     <value>Downgrade {0} available</value>
@@ -257,28 +257,31 @@
     <value>Downgrading to</value>
   </data>
   <data name="UpdateToast_Downloading" xml:space="preserve">
-    <value>Downloading…</value>
+    <value>در حال دانلود…</value>
   </data>
   <data name="UpdateToast_DownloadInProgress" xml:space="preserve">
-    <value>Download in progress</value>
+    <value>دانلود در حال انجام است</value>
   </data>
   <data name="UpdateToast_GoToDownloadPage" xml:space="preserve">
-    <value>Go to download page</value>
+    <value>به صفحه دانلود بروید</value>
   </data>
   <data name="UpdateToast_Message" xml:space="preserve">
-    <value>Message</value>
+    <value>پیام</value>
   </data>
   <data name="UpdateToast_NewVersionAvailable" xml:space="preserve">
-    <value>New version {0} available</value>
+    <value>نسخه جدید {0} موجود است</value>
     <comment>MUST contain the placerholder string!! That's where the version number is injected.</comment>
   </data>
   <data name="UpdateToast_PatchingFailed" xml:space="preserve">
     <value>Patching failed</value>
   </data>
   <data name="UpdateToast_SeeLogs" xml:space="preserve">
-    <value>Please check service.log and updater.log for infos</value>
+    <value>لطفا برای اطلاعات بیشتر، service.log و updater.log را بررسی کنید</value>
   </data>
   <data name="UpdateToast_UpgradingTo" xml:space="preserve">
-    <value>Updating to</value>
+    <value>بروزرسانی به</value>
+  </data>
+  <data name="ForOneHour" xml:space="preserve">
+    <value>به مدت یک ساعت</value>
   </data>
 </root>
