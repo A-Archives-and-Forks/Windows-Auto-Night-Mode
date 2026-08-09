@@ -107,6 +107,13 @@ public class AmbientLightGovernor : IAutoDarkModeGovernor
             return;
         }
 
+        // Don't process while a theme is forced, the request would be overridden by ThemeManager anyway
+        if (state.ForcedTheme != Theme.Unknown)
+        {
+            CancelPendingThemeChange();
+            return;
+        }
+
         // Don't process while postpone is active (user delayed the switch)
         if (state.PostponeManager.IsPostponed)
         {
