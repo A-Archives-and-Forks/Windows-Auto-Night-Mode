@@ -541,6 +541,10 @@ Currently installed version: {0}, new version: {1}</value>
   <data name="NextUpdateAt" xml:space="preserve">
     <value>Next update</value>
   </data>
+  <data name="NextUpdateInProgress" xml:space="preserve">
+    <value>In progress</value>
+    <comment>Shown instead of a date when the location has not been retrieved yet</comment>
+  </data>
   <data name="None" xml:space="preserve">
     <value>None</value>
   </data>

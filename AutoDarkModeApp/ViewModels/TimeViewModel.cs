@@ -476,6 +476,9 @@ public partial class TimeViewModel : ObservableRecipient
                 LocationHandler.GetSunTimesWithOffset(_builder, out DateTime SunriseWithOffset, out DateTime SunsetWithOffset);
                 TimeLightStart = SunriseWithOffset.TimeOfDay;
                 TimeDarkStart = SunsetWithOffset.TimeOfDay;
+
+                // location data has been reloaded from disk by now, so the next update time may have become available
+                UpdateLocationNextUpdateDescription();
             }
             else if (SelectedTriggerMode == SwitchTriggerMode.CustomTimes)
             {
@@ -485,10 +488,22 @@ public partial class TimeViewModel : ObservableRecipient
             // AmbientLight and WindowsNightLight modes don't need time/location data
         });
 
-        DateTime nextUpdate = _builder.LocationData.LastUpdate.Add(_builder.Config.Location.PollingCooldownTimeSpan);
-        LocationNextUpdateDateDescription = "NextUpdateAt".GetLocalized() + ": " + nextUpdate.ToString("g", CultureInfo.CurrentCulture);
+        UpdateLocationNextUpdateDescription();
 
         _isInitializing = false;
+    }
+
+    private void UpdateLocationNextUpdateDescription()
+    {
+        // the service has never written location data, so there is nothing to base a next update time on yet
+        if (_builder.LocationData.LastUpdate == default)
+        {
+            LocationNextUpdateDateDescription = "NextUpdateAt".GetLocalized() + ": " + "NextUpdateInProgress".GetLocalized();
+            return;
+        }
+
+        DateTime nextUpdate = _builder.LocationData.LastUpdate.Add(_builder.Config.Location.PollingCooldownTimeSpan);
+        LocationNextUpdateDateDescription = "NextUpdateAt".GetLocalized() + ": " + nextUpdate.ToString("g", CultureInfo.CurrentCulture);
     }
 
     private async Task LoadGeolocationData()
