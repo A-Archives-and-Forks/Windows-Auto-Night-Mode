@@ -45,6 +45,13 @@ public static class ToastHandler
     {
         try
         {
+            // the ambient light governor reacts to sensor readings and never reports a switch window,
+            // so there is no upcoming switch to announce or delay
+            if (builder.Config.Governor == Governor.AmbientLight)
+            {
+                Logger.Debug("ambient light governor is active, skipping auto switch notification");
+                return;
+            }
             if (state.PostponeManager.Get(Helper.PostponeItemDelayGracePeriod) != null) return;
             if (state.PostponeManager.IsSkipNextSwitch || state.PostponeManager.IsUserDelayed)
             {

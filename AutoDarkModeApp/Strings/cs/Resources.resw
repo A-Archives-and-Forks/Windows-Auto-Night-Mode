@@ -367,6 +367,13 @@ Klikněte na „Ano“ pro otevření nového okna v prohlížeči.
   <data name="Hex code" xml:space="preserve">
     <value>Hex kód</value>
   </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>Skrytí této ikony se nedoporučuje. 
+Přejete si pokračovat?</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>Skrytí ikony na panelu</value>
+  </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>Klávesové zkratky</value>
   </data>

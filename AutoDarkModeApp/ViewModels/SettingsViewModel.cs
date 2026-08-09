@@ -13,6 +13,7 @@ public partial class SettingsViewModel : ObservableRecipient
     private readonly IErrorService _errorService;
     private readonly ILocalSettingsService _localSettingsService;
     private bool _isInitializing;
+    private bool _revertingTrayIcon;
     private const int fakeResponsiveUIDelay = 500;
 
     public enum DaysBetweenUpdateCheck
@@ -331,6 +332,45 @@ public partial class SettingsViewModel : ObservableRecipient
         if (_isInitializing)
             return;
 
+        // set while reverting the toggle after a cancelled confirmation, so the revert
+        // does not run the handler again and save or restart the service
+        if (_revertingTrayIcon)
+            return;
+
+        // hiding the tray icon is not recommended, so it has to be confirmed first
+        if (!value)
+        {
+            ContentDialog contentDialog = new()
+            {
+                Title = "HideTrayIconMsg_Title".GetLocalized(),
+                Content = "HideTrayIconMsg_Content".GetLocalized(),
+                XamlRoot = App.MainWindow.Content.XamlRoot,
+                CloseButtonText = "Cancel".GetLocalized(),
+                PrimaryButtonText = "Confirm".GetLocalized(),
+                DefaultButton = ContentDialogButton.Close
+            };
+            _dispatcherQueue.TryEnqueue(async () =>
+            {
+                var result = await contentDialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    ApplyShowTrayIcon(false);
+                }
+                else
+                {
+                    _revertingTrayIcon = true;
+                    IsShowTrayIcon = true;
+                    _revertingTrayIcon = false;
+                }
+            });
+            return;
+        }
+
+        ApplyShowTrayIcon(true);
+    }
+
+    private void ApplyShowTrayIcon(bool value)
+    {
         _builder.Config.Tunable.ShowTrayIcon = value;
 
         SafeSaveBuilder();

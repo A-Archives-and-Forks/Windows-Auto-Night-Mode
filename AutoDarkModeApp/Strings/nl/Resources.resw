@@ -364,6 +364,13 @@ Wilt u een probleem melden in de Auto Dark Mode-repository?</value>
   <data name="Hex code" xml:space="preserve">
     <value>HEX-code</value>
   </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>Het is niet aanbevolen om het icoon te verbergen.
+Wilt u alsnog doorgaan?</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>Systeemvakicoon verbergen</value>
+  </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>Sneltoetsen</value>
   </data>

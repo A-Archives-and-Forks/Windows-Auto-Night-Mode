@@ -364,6 +364,13 @@ Szeretne egy hibabejelentést tenni az Auto Dark Mode repository-n?</value>
   <data name="Hex code" xml:space="preserve">
     <value>Hex kód</value>
   </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>Az ikon elrejtése nem ajánlott.
+Tényleg folytatni szeretné?</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>Tálca ikon elrejtése</value>
+  </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>Gyorsbillentyűk</value>
   </data>

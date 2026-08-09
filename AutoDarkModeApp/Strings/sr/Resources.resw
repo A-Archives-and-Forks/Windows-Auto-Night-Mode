@@ -367,6 +367,13 @@ Pritisnite "Da" da otvorite novi prozor u pregledaču.
   <data name="Hex code" xml:space="preserve">
     <value>Heks kod</value>
   </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>Sakrivanje ikonice se ne preporučuje.
+Jeste li sigurni da želite da nastavite?</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>Sakrij ikonicu u sistemskoj paleti</value>
+  </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>Tasterske prečice</value>
   </data>

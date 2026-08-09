@@ -364,6 +364,13 @@ Auto Dark Mode 레포지토리에 문제를 등록할까요?</value>
   <data name="Hex code" xml:space="preserve">
     <value>Hex 코드</value>
   </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>아이콘을 숨기는 것은 권장되지 않습니다.
+계속하고 싶으십니까?</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>트레이 아이콘 숨기기</value>
+  </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>단축키</value>
   </data>

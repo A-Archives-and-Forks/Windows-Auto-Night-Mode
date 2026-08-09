@@ -74,6 +74,16 @@ static class ThemeManager
         }
 
 
+        // the night light and ambient light governors report a concrete theme instead of Theme.Resolve,
+        // so they would pass the check below and never reach the battery check further down.
+        // while discharging, their requests are dropped the same way the time switch module's are
+        if (builder.Config.Events.DarkThemeOnBattery 
+            && PowerManager.PowerSupplyStatus == PowerSupplyStatus.NotPresent
+            && (e.Source == SwitchSource.NightLightTrackerModule || e.Source == SwitchSource.AmbientLightSensorModule))
+        {
+            return;
+        }
+
         // process switches with a requested theme
         if (e.Theme != Theme.Resolve)
         {

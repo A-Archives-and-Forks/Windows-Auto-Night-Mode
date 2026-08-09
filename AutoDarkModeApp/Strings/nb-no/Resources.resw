@@ -367,6 +367,13 @@ Klikk "Ja" for å åpne et nytt nettleservindu.
   <data name="Hex code" xml:space="preserve">
     <value>Hex-kode</value>
   </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>Å skjule ikonet er ikke anbefalt.
+Vil du virkelig fortsette?</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>Skjul verktøylinjeikon.</value>
+  </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>Hurtigtaster</value>
   </data>

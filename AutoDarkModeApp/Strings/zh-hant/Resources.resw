@@ -364,6 +364,13 @@
   <data name="Hex code" xml:space="preserve">
     <value>十六進制色碼</value>
   </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>不建議隱藏系統匣圖示。
+您確定要繼續嗎？</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>隱藏系統匣圖示</value>
+  </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>快捷鍵</value>
   </data>

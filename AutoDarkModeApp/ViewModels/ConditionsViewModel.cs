@@ -42,6 +42,29 @@ public partial class ConditionsViewModel : ObservableRecipient
     [ObservableProperty]
     public partial int AutoSwitchNotifyGracePeriodMinutes { get; set; }
 
+    /// <summary>
+    /// False while the ambient light governor is active, as it switches without announcing a switch window
+    /// </summary>
+    [ObservableProperty]
+    public partial bool AutoSwitchNotifyAvailable { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AutoSwitchNotifyCardCornerRadius))]
+    public partial bool IsAutoSwitchNotifyUnavailableInfoBarOpen { get; set; }
+
+    /// <summary>
+    /// Squares off the bottom of the notification card while the info bar is attached below it,
+    /// so the two read as a single block instead of two separate cards
+    /// </summary>
+    public CornerRadius AutoSwitchNotifyCardCornerRadius =>
+        IsAutoSwitchNotifyUnavailableInfoBarOpen ? new CornerRadius(4, 4, 0, 0) : new CornerRadius(4);
+
+    /// <summary>
+    /// The grace period only applies to a notification that can actually be shown
+    /// </summary>
+    [ObservableProperty]
+    public partial bool AutoSwitchNotifyGracePeriodAvailable { get; set; }
+
     [ObservableProperty]
     public partial bool BatterySettingsCardVisibility { get; set; }
 
@@ -97,6 +120,9 @@ public partial class ConditionsViewModel : ObservableRecipient
         IdleCheckerThreshold = _builder.Config.IdleChecker.Threshold;
         AutoSwitchNotifyEnabled = _builder.Config.AutoSwitchNotify.Enabled;
         AutoSwitchNotifyGracePeriodMinutes = _builder.Config.AutoSwitchNotify.GracePeriodMinutes;
+        AutoSwitchNotifyAvailable = _builder.Config.Governor != Governor.AmbientLight;
+        IsAutoSwitchNotifyUnavailableInfoBarOpen = !AutoSwitchNotifyAvailable;
+        AutoSwitchNotifyGracePeriodAvailable = AutoSwitchNotifyAvailable && AutoSwitchNotifyEnabled;
         BatterySettingsCardVisibility = PowerManager.BatteryStatus != BatteryStatus.NotPresent;
         BatteryDarkModeEnabled = _builder.Config.Events.DarkThemeOnBattery;
 
@@ -210,6 +236,7 @@ public partial class ConditionsViewModel : ObservableRecipient
         if (_isInitializing)
             return;
 
+        AutoSwitchNotifyGracePeriodAvailable = AutoSwitchNotifyAvailable && value;
         _builder.Config.AutoSwitchNotify.Enabled = value;
         try
         {

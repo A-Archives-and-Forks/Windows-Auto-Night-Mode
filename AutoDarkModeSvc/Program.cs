@@ -69,6 +69,13 @@ static class Program
                 return;
             }
         }
+        catch (AbandonedMutexException)
+        {
+            // the previous instance exited without releasing the mutex, which is what happens on restart.
+            // the wait still succeeded and this process owns the mutex now, so startup has to continue.
+            // returning here would leave the user without a running service after every restart
+            Logger.Debug("mutex was abandoned by the previous instance, continuing startup");
+        }
         catch (Exception ex)
         {
             Logger.Error(ex, "failed getting mutex, " + ex.Message);

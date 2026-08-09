@@ -364,6 +364,13 @@
   <data name="Hex code" xml:space="preserve">
     <value>Δεκαεξαδικός κωδικός</value>
   </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>Η απόκρυψη του εικονιδίου δεν συνιστάται.
+Θέλετε πραγματικά να συνεχίσετε;</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>Απόκρυψη εικονιδίου περιοχής ειδοποήσεων</value>
+  </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>Πλήκτρα συντόμευσης</value>
   </data>

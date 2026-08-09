@@ -364,6 +364,13 @@
   <data name="Hex code" xml:space="preserve">
     <value>کد hex</value>
   </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>Hiding the icon isn't recommended.
+Do you really want to continue?</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>Hide Tray Icon</value>
+  </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>میانبرها</value>
   </data>

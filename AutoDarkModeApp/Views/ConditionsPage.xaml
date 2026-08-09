@@ -89,22 +89,34 @@
                 </controls:SettingsExpander>
 
                 <!--  AutoSwitchNotification  -->
-                <controls:SettingsExpander HeaderIcon="{ui:FontIcon Glyph=&#xE7E7;}">
-                    <controls:SettingsExpander.Header>
-                        <CheckBox
-                            x:Name="AutoSwitchNotifyCheckBox"
-                            Content="{helpers:ResourceString Name=AutoSwitchNotification}"
-                            IsChecked="{x:Bind ViewModel.AutoSwitchNotifyEnabled, Mode=TwoWay}" />
-                    </controls:SettingsExpander.Header>
-                    <controls:SettingsExpander.Items>
-                        <controls:SettingsCard Header="{helpers:ResourceString Name=AutoSwitchGracePeriod}" IsEnabled="{x:Bind ViewModel.AutoSwitchNotifyEnabled, Converter={StaticResource NullableBoolToBoolConverter}, Mode=OneWay}">
-                            <NumberBox
-                                Minimum="1"
-                                SpinButtonPlacementMode="Inline"
-                                Value="{x:Bind ViewModel.AutoSwitchNotifyGracePeriodMinutes, Mode=TwoWay}" />
-                        </controls:SettingsCard>
-                    </controls:SettingsExpander.Items>
-                </controls:SettingsExpander>
+                <!--  spacing 0 and the matching corner radii below attach the info bar to the card above it  -->
+                <StackPanel Spacing="0">
+                    <controls:SettingsExpander CornerRadius="{x:Bind ViewModel.AutoSwitchNotifyCardCornerRadius, Mode=OneWay}" HeaderIcon="{ui:FontIcon Glyph=&#xE7E7;}">
+                        <controls:SettingsExpander.Header>
+                            <CheckBox
+                                x:Name="AutoSwitchNotifyCheckBox"
+                                Content="{helpers:ResourceString Name=AutoSwitchNotification}"
+                                IsChecked="{x:Bind ViewModel.AutoSwitchNotifyEnabled, Mode=TwoWay}"
+                                IsEnabled="{x:Bind ViewModel.AutoSwitchNotifyAvailable, Mode=OneWay}" />
+                        </controls:SettingsExpander.Header>
+                        <controls:SettingsExpander.Items>
+                            <controls:SettingsCard Header="{helpers:ResourceString Name=AutoSwitchGracePeriod}" IsEnabled="{x:Bind ViewModel.AutoSwitchNotifyGracePeriodAvailable, Mode=OneWay}">
+                                <NumberBox
+                                    Minimum="1"
+                                    SpinButtonPlacementMode="Inline"
+                                    Value="{x:Bind ViewModel.AutoSwitchNotifyGracePeriodMinutes, Mode=TwoWay}" />
+                            </controls:SettingsCard>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+                    <InfoBar
+                        BorderThickness="1,0,1,1"
+                        CornerRadius="0,0,4,4"
+                        IsClosable="False"
+                        IsOpen="{x:Bind ViewModel.IsAutoSwitchNotifyUnavailableInfoBarOpen, Mode=OneWay}"
+                        Message="{helpers:ResourceString Name=AutoSwitchNotifyUnavailable_Content}"
+                        Severity="Informational"
+                        Title="{helpers:ResourceString Name=AutoSwitchNotifyUnavailable_Title}" />
+                </StackPanel>
 
                 <!--  BatteryPowered  -->
                 <TextBlock

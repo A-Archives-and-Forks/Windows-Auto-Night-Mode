@@ -168,6 +168,14 @@
   <data name="AutoSwitchNotification" xml:space="preserve">
     <value>Notify before automatically switching themes</value>
   </data>
+  <data name="AutoSwitchNotifyUnavailable_Content" xml:space="preserve">
+    <value>The ambient light sensor switches as soon as the brightness passes a threshold, so there is no upcoming switch to announce in advance.</value>
+    <comment>Info bar explaining why the switch notification option is disabled</comment>
+  </data>
+  <data name="AutoSwitchNotifyUnavailable_Title" xml:space="preserve">
+    <value>Not available with the ambient light sensor</value>
+    <comment>Info bar title shown when the ambient light governor is active</comment>
+  </data>
   <data name="AutoThemeSwitchingResumed" xml:space="preserve">
     <value>Auto theme switching resumed</value>
   </data>
@@ -366,6 +374,13 @@ Would you like to create an issue on the Auto Dark Mode repository?</value>
   </data>
   <data name="Hex code" xml:space="preserve">
     <value>Hex code</value>
+  </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>Hiding the icon isn't recommended.
+Do you really want to continue?</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>Hide Tray Icon</value>
   </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>Hotkeys</value>

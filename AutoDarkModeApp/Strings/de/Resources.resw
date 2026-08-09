@@ -366,6 +366,13 @@ Drücke "ja", um ein neues Browserfenster zu öffnen.</value>
   <data name="Hex code" xml:space="preserve">
     <value>Hex Code</value>
   </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>Das Icon zu verstecken ist nicht empfohlen.
+Möchten Sie wirklich fortfahren?</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>Systemtray-Icon verstecken</value>
+  </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>Tastenkürzel</value>
   </data>
