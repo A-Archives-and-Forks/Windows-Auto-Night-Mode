@@ -23,10 +23,21 @@ public class NightLightGovernor : IAutoDarkModeGovernor
     private bool init = true;
     private bool queuePostponeRemove = false;
     private bool switchQueuedButNotRequested = false;
-    private bool regkeyUpdatedJustNow = false;
     private IAutoDarkModeModule Master { get; }
 
-    public bool InstantSwitchWindow { get; set; } = false;
+    /// <summary>
+    /// True while the configured offset for the upcoming switch is zero. The registry key event then arrives
+    /// at the exact time of the switch, so there is no time span left in which the timer could report a
+    /// switch window ahead of it.
+    /// </summary>
+    private bool instantSwitchWindow = false;
+
+    /// <summary>
+    /// Set when the governor itself triggers a switch, consumed by the next <see cref="Run"/>.
+    /// Ensures the instant switch window is only reported for the fire the governor caused,
+    /// and not again on the following timer ticks.
+    /// </summary>
+    private bool instantSwitchWindowPending = false;
 
     public NightLightGovernor(IAutoDarkModeModule master)
     {
@@ -87,26 +98,26 @@ public class NightLightGovernor : IAutoDarkModeGovernor
 
         bool reportSwitchWindow = state.SwitchApproach.DependenciesPresent && !init;
 
-        // if reporting is enabled and we are not in the switch window, we need to set the report variable back to false
-        if (reportSwitchWindow &&
-            !Helper.NowIsBetweenTimes(adjustedSwitchWindowStart.TimeOfDay, adjustedSwitchWindowEnd.TimeOfDay))
+        // the pending flag is a one shot, so it has to be consumed on every run
+        bool instantWindow = instantSwitchWindowPending;
+        instantSwitchWindowPending = false;
+
+        if (reportSwitchWindow)
         {
-            // override if the instant switch window is possible and the registry key just updated
-            if (InstantSwitchWindow && regkeyUpdatedJustNow)
+            if (instantSwitchWindow)
             {
-                reportSwitchWindow = true;
+                // there is no time span the timer could report, so only the registry key event may open the window
+                reportSwitchWindow = instantWindow;
             }
-            else
+            else if (!Helper.NowIsBetweenTimes(adjustedSwitchWindowStart.TimeOfDay, adjustedSwitchWindowEnd.TimeOfDay))
             {
+                // reporting is enabled, but we are not in the switch window
                 reportSwitchWindow = false;
             }
         }
 
-        // set this back to false by default, doesn't matter
-        regkeyUpdatedJustNow = false;
-
         if (init) init = false;
-        return new(reportSwitchWindow, new(SwitchSource.NightLightTrackerModule, state.NightLight.Requested, adjustedTime));
+        return new(reportSwitchWindow, new(SwitchSource.NightLightTrackerModule, state.NightLight.Requested, adjustedTime), instantSwitchWindow: instantWindow);
     }
 
     public void DisableHook()
@@ -144,11 +155,11 @@ public class NightLightGovernor : IAutoDarkModeGovernor
             // instantSwitchWindow is used to prevent the timer from duplicating the switch window operations when the event
             // should be responsible for it
             if (nightLightState == Theme.Dark && builder.Config.Location.SunsetOffsetMin == 0)
-                InstantSwitchWindow = true;
+                instantSwitchWindow = true;
             else if (nightLightState == Theme.Light && builder.Config.Location.SunriseOffsetMin == 0)
-                InstantSwitchWindow = true;
+                instantSwitchWindow = true;
             else
-                InstantSwitchWindow = false;
+                instantSwitchWindow = false;
 
 
             Logger.Info($"night light status enabled changed to {enabled}");
@@ -170,7 +181,7 @@ public class NightLightGovernor : IAutoDarkModeGovernor
             {
                 queuePostponeRemove = false;
             }
-            regkeyUpdatedJustNow = true;
+            instantSwitchWindowPending = instantSwitchWindow;
             Master.Fire(this);
         }
     }

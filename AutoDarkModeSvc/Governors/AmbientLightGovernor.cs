@@ -53,6 +53,13 @@ public class AmbientLightGovernor : IAutoDarkModeGovernor
     private int _debounceDelayMs;
     private readonly object _debounceLock = new();
 
+    /// <summary>
+    /// Set when the governor itself triggers a switch, consumed by the next <see cref="Run"/>.
+    /// Sensor driven switches have no predictable switch time, so the timer cannot report a switch window
+    /// ahead of them. Instead the window is reported on the fire the governor caused.
+    /// </summary>
+    private bool _instantSwitchWindowPending;
+
     public AmbientLightGovernor(IAutoDarkModeModule master)
     {
         Master = master;
@@ -83,6 +90,18 @@ public class AmbientLightGovernor : IAutoDarkModeGovernor
         if (init)
         {
             init = false;
+        }
+
+        // The governor caused this run, so the switch is imminent. Report a switch window with no duration,
+        // which makes the governor module run the dependency modules (process block list, gpu monitor)
+        // before the switch is requested, giving them the chance to postpone it
+        if (_instantSwitchWindowPending)
+        {
+            _instantSwitchWindowPending = false;
+            if (state.SwitchApproach.DependenciesPresent)
+            {
+                return new(true, new(SwitchSource.AmbientLightSensorModule, state.AmbientLight.Requested), instantSwitchWindow: true);
+            }
         }
 
         // If we're in a debounce period, don't trigger any switch from the timer
@@ -221,6 +240,7 @@ public class AmbientLightGovernor : IAutoDarkModeGovernor
 
             if (currentTheme != previousTheme)
             {
+                _instantSwitchWindowPending = true;
                 Master.Fire(this);
             }
         }
@@ -262,6 +282,7 @@ public class AmbientLightGovernor : IAutoDarkModeGovernor
                 Logger.Info($"config change triggered immediate switch to {newTheme} (lux: {lux:F1}, thresholds: {darkThreshold}/{lightThreshold})");
                 currentTheme = newTheme;
                 state.AmbientLight.Requested = newTheme;
+                _instantSwitchWindowPending = true;
                 Master.Fire(this);
             }
         }

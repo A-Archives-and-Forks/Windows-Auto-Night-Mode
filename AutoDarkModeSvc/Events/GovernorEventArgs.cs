@@ -9,10 +9,15 @@ public class GovernorEventArgs : EventArgs
     /// </summary>
     /// <param name="inSwitchWindow">If the governor is currently within the defined switch window</param>
     /// <param name="switchEventArgs">The event args of the switch request</param>
-    public GovernorEventArgs(bool inSwitchWindow, SwitchEventArgs switchEventArgs)
+    /// <param name="instantSwitchWindow">
+    /// If the switch window has no duration, meaning the governor module has to trigger the switch approach
+    /// dependency modules itself before requesting the switch
+    /// </param>
+    public GovernorEventArgs(bool inSwitchWindow, SwitchEventArgs switchEventArgs, bool instantSwitchWindow = false)
     {
         InSwitchWindow = inSwitchWindow;
         SwitchEventArgs = switchEventArgs;
+        InstantSwitchWindow = instantSwitchWindow;
     }
 
     /// <summary>
@@ -25,5 +30,6 @@ public class GovernorEventArgs : EventArgs
     }
 
     public bool InSwitchWindow { get; }
+    public bool InstantSwitchWindow { get; }
     public SwitchEventArgs SwitchEventArgs { get; } = null;
 }
