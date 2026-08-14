@@ -92,12 +92,23 @@ public partial class SettingsViewModel : ObservableRecipient
     [ObservableProperty]
     public partial Visibility GridAutostartVisibility { get; set; }
 
+    /// <summary>
+    /// The write kicked off by the language dropdown. Restart waits on it so the new code reaches
+    /// LocalSettings.json before this process goes away.
+    /// </summary>
+    private Task _pendingLanguageSave = Task.CompletedTask;
+
     [RelayCommand]
-    private void Restart()
+    private async Task Restart()
     {
         try
         {
             _builder.Save();
+            await _pendingLanguageSave;
+
+            // Application.Exit() is not guaranteed to run the MainWindow.Closed handler to
+            // completion, so persist the window placement here rather than relying on it.
+            App.GetService<ICloseService>().Close();
         }
         catch (Exception ex)
         {
@@ -105,7 +116,12 @@ public partial class SettingsViewModel : ObservableRecipient
         }
 
         MessageHandler.Client.SendMessageAndGetReply(Command.Restart);
-        Process.Start(new ProcessStartInfo(Helper.ExecutionPathApp) { UseShellExecute = false, Verb = "open" });
+        Process.Start(new ProcessStartInfo(Helper.ExecutionPathApp)
+        {
+            UseShellExecute = false,
+            Verb = "open",
+            ArgumentList = { App.RestartArgument, Environment.ProcessId.ToString(CultureInfo.InvariantCulture) },
+        });
         Microsoft.UI.Xaml.Application.Current.Exit();
     }
 
@@ -408,8 +424,9 @@ public partial class SettingsViewModel : ObservableRecipient
             bool isSameLanguage = string.Equals(currentCulture, value, StringComparison.OrdinalIgnoreCase);
             Debug.WriteLine($"Current UI Culture: {currentCulture}, Selected SelectedLanguage: {value}, LanguageChanged: {!isSameLanguage}");
 
-            _localSettingsService.SaveSettingAsync("SelectedLanguageCode", value);
-            _localSettingsService.SaveSettingAsync("LanguageChanged", !isSameLanguage); // used for ActivationService > jumplist
+            // Keep a handle on the write. Restart awaits it; previously both calls were dropped on
+            // the floor and Application.Exit() could kill the process before either reached disk.
+            _pendingLanguageSave = SaveLanguageSettingsAsync(value, !isSameLanguage);
             IsLanguageChangedInfoBarOpen = !isSameLanguage;
 
             LanguageHelper.SelectedLanguageCode = value; // for internal reference
@@ -424,6 +441,12 @@ public partial class SettingsViewModel : ObservableRecipient
                 _errorService.ShowErrorMessage(ex, App.MainWindow.Content.XamlRoot, "SettingsViewModel");
             }
         });
+    }
+
+    private async Task SaveLanguageSettingsAsync(string languageCode, bool languageChanged)
+    {
+        await _localSettingsService.SaveSettingAsync("SelectedLanguageCode", languageCode);
+        await _localSettingsService.SaveSettingAsync("LanguageChanged", languageChanged); // used for ActivationService > jumplist
     }
 
     partial void OnIsUpdaterEnabledChanged(bool value)

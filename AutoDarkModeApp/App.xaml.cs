@@ -107,16 +107,63 @@ public partial class App : Application
         UnhandledException += App_UnhandledException;
     }
 
+    /// <summary>
+    /// Passed to the new instance when the app restarts itself, followed by the process id of the
+    /// instance being replaced.
+    /// </summary>
+    public const string RestartArgument = "--restarted-from";
+
     public static void CheckAppMutex()
     {
-        if (!Mutex.WaitOne(TimeSpan.FromMilliseconds(50), false) && !Debugger.IsAttached)
+        // On a self-restart the outgoing instance is still alive and still holds the mutex. Without
+        // waiting for it, this instance would hand focus back to a process that is already exiting
+        // and then quit, leaving nothing running.
+        if (TryGetRestartPredecessorId(out var predecessorId))
         {
-            var processes = Process.GetProcessesByName("AutoDarkModeApp").Where(p => p.Id != Environment.ProcessId).ToList();
-            if (processes.Count > 0)
+            WaitForPredecessorExit(predecessorId);
+        }
+
+        if (Mutex.WaitOne(TimeSpan.FromMilliseconds(50), false) || Debugger.IsAttached)
+        {
+            return;
+        }
+
+        var processes = Process.GetProcessesByName("AutoDarkModeApp").Where(p => p.Id != Environment.ProcessId).ToList();
+        if (processes.Count > 0)
+        {
+            Helpers.WindowHelper.BringProcessToFront(processes[0]);
+            App.Current.Exit();
+        }
+    }
+
+    private static bool TryGetRestartPredecessorId(out int processId)
+    {
+        processId = 0;
+        var arguments = Environment.GetCommandLineArgs();
+        for (var i = 1; i < arguments.Length - 1; i++)
+        {
+            if (arguments[i] == RestartArgument && int.TryParse(arguments[i + 1], out processId))
             {
-                Helpers.WindowHelper.BringProcessToFront(processes[0]);
-                App.Current.Exit();
+                return true;
             }
+        }
+        return false;
+    }
+
+    private static void WaitForPredecessorExit(int processId)
+    {
+        try
+        {
+            using var predecessor = Process.GetProcessById(processId);
+            predecessor.WaitForExit(10000);
+        }
+        catch (ArgumentException)
+        {
+            // already gone, nothing to wait for
+        }
+        catch (InvalidOperationException)
+        {
+            // already gone, nothing to wait for
         }
     }
 
@@ -130,9 +177,9 @@ public partial class App : Application
     {
         base.OnLaunched(args);
 
-        // Handle JumpListCommand
+        // Handle JumpListCommand. The restart handoff argument is ours, not a jumplist command.
         var arguments = Environment.GetCommandLineArgs();
-        if (arguments.Length > 1)
+        if (arguments.Length > 1 && arguments[1] != RestartArgument)
         {
             new PipeClient().SendMessageAndGetReply(arguments[1]);
             App.Current.Exit();
@@ -151,7 +198,7 @@ public partial class App : Application
 
         // NOTE: Here we use the DI container to get the MainWindow and set it as a static property, which not only conforms to the standard, but also facilitates other places to access the MainWindow.
         MainWindow = GetService<MainWindow>();
-        MainWindow.Closed += async (s, e) => await GetService<ICloseService>().CloseAsync();
+        MainWindow.Closed += (s, e) => GetService<ICloseService>().Close();
 
         await GetService<IActivationService>().ActivateAsync(args);
 

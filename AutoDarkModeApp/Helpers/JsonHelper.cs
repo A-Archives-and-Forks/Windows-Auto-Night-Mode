@@ -28,4 +28,16 @@ public static class Json
         return await Task.Run(() =>
             JsonSerializer.Serialize(value, _options));
     }
+
+    public static T? ToObject<T>(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return default;
+        }
+
+        return JsonSerializer.Deserialize<T>(value, _options);
+    }
+
+    public static string Stringify(object value) => JsonSerializer.Serialize(value, _options);
 }

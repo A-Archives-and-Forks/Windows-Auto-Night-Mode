@@ -100,13 +100,20 @@ public class ActivationService(ILocalSettingsService localSettingsService, INavi
 
     private async Task MoveWindowAsync()
     {
-        var left = await localSettingsService.ReadSettingAsync<int>("X");
-        var top = await localSettingsService.ReadSettingAsync<int>("Y");
-        var width = await localSettingsService.ReadSettingAsync<int>("Width");
-        var height = await localSettingsService.ReadSettingAsync<int>("Height");
-        var windowState = await localSettingsService.ReadSettingAsync<int>("WindowState");
+        var left = await localSettingsService.ReadSettingAsync<int?>("X");
+        var top = await localSettingsService.ReadSettingAsync<int?>("Y");
+        var width = await localSettingsService.ReadSettingAsync<int?>("Width");
+        var height = await localSettingsService.ReadSettingAsync<int?>("Height");
 
-        App.MainWindow.AppWindow.MoveAndResize(new Windows.Graphics.RectInt32(left, top, width, height));
+        // OverlappedPresenterState.Maximized is 0, so reading a missing key as int makes "never
+        // saved" indistinguishable from "was maximized". Default to Restored instead.
+        var windowState = await localSettingsService.ReadSettingAsync<int?>("WindowState")
+            ?? (int)OverlappedPresenterState.Restored;
+
+        if (width is > 0 && height is > 0)
+        {
+            App.MainWindow.AppWindow.MoveAndResize(new Windows.Graphics.RectInt32(left ?? 0, top ?? 0, width.Value, height.Value));
+        }
 
         var presenter = App.MainWindow.AppWindow.Presenter as OverlappedPresenter;
         if (presenter != null)

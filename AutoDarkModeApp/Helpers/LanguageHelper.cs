@@ -5,7 +5,9 @@ namespace AutoDarkModeApp.Helpers;
 
 public static class LanguageHelper
 {
-    public static string SelectedLanguageCode { get; set; } = "en-US"; // equal to <DefaultLanguage>
+    // Must be a member of SupportedCultures, otherwise it is rejected on every launch and no entry
+    // in the language dropdown can match it.
+    public static string SelectedLanguageCode { get; set; } = "en";
 
     public static readonly string[] SupportedCultures =
     [
@@ -22,40 +24,52 @@ public static class LanguageHelper
     {
         var localSettingsService = App.GetService<ILocalSettingsService>();
         var language = await localSettingsService.ReadSettingAsync<string>("SelectedLanguageCode");
-        if (!string.IsNullOrEmpty(language) && SupportedCultures.Contains(language))
+        if (!string.IsNullOrEmpty(language) && TryMatchSupportedCulture(language, out var saved))
         {
-            SelectedLanguageCode = language;
+            SelectedLanguageCode = saved;
+            return SelectedLanguageCode;
         }
-        else
+
+        var preferredLanguages = ApplicationLanguages.Languages; // example: ["fr-FR", "en-US", "de-DE"]
+        var topLanguage = preferredLanguages.Any()
+            ? preferredLanguages[0]
+            : CultureInfo.CurrentUICulture.Name; // very unlikely, but just in case
+
+        if (TryMatchSupportedCulture(topLanguage, out var matched))
         {
-            var preferredLanguages = ApplicationLanguages.Languages; // example: ["fr-FR", "en-US", "de-DE"]
-            string topLanguage;
-            if (preferredLanguages.Any())
+            SelectedLanguageCode = matched;
+        }
+        // else keep the default
+
+        await localSettingsService.SaveSettingAsync("SelectedLanguageCode", SelectedLanguageCode);
+        return SelectedLanguageCode;
+    }
+
+    /// <summary>
+    /// Resolves a language tag against <see cref="SupportedCultures"/>, dropping one subtag at a
+    /// time: "fr-FR" matches "fr", "zh-Hans-CN" matches "zh-Hans". Returns the canonically cased
+    /// entry so it lines up with the codes bound to the language dropdown.
+    /// </summary>
+    private static bool TryMatchSupportedCulture(string languageTag, out string match)
+    {
+        for (var candidate = languageTag; !string.IsNullOrEmpty(candidate); )
+        {
+            var supported = SupportedCultures.FirstOrDefault(c => string.Equals(c, candidate, StringComparison.OrdinalIgnoreCase));
+            if (supported != null)
             {
-                topLanguage = preferredLanguages[0];
-            }
-            else // very unlikely, but just in case
-            {
-                topLanguage = CultureInfo.CurrentUICulture.Name;
+                match = supported;
+                return true;
             }
 
-            if (SupportedCultures.Contains(topLanguage))
+            var lastSeparator = candidate.LastIndexOf('-');
+            if (lastSeparator < 0)
             {
-                SelectedLanguageCode = topLanguage;
+                break;
             }
-            else
-            {
-                var topLanguageArray = topLanguage.Split('-');
-                //var neutralLanguage = topLanguageArray[0]; // example: "fr"
-                var neutralLanguage = string.Join("-", topLanguageArray[..^1]); // example: "fr" or "zh-Hans"
-                if (SupportedCultures.Contains(neutralLanguage))
-                {
-                    SelectedLanguageCode = neutralLanguage;
-                }
-                // else keep the default "en-US"
-            }
-            await localSettingsService.SaveSettingAsync("SelectedLanguageCode", SelectedLanguageCode);
+            candidate = candidate[..lastSeparator];
         }
-        return SelectedLanguageCode;
+
+        match = string.Empty;
+        return false;
     }
 }
