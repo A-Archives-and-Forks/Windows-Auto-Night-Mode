@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -124,16 +124,16 @@
     <value>Rólunk</value>
   </data>
   <data name="AccentColor" xml:space="preserve">
-    <value>Kiemelőszín</value>
+    <value>Témaszín</value>
   </data>
   <data name="AccentOnly" xml:space="preserve">
-    <value>Csak Kiemelőszín</value>
+    <value>Csak Témaszín</value>
   </data>
   <data name="ActiveDelays" xml:space="preserve">
     <value>Aktív halasztások</value>
   </data>
   <data name="AdaptiveTaskbarAccent" xml:space="preserve">
-    <value>Használja a Tálca kiemelőszínét</value>
+    <value>Használja a Tálca témaszínét</value>
   </data>
   <data name="AdaptToSystem" xml:space="preserve">
     <value>Alkalmazkodjon a rendszerhez</value>
@@ -364,11 +364,7 @@ Szeretne egy hibabejelentést tenni az Auto Dark Mode repository-n?</value>
   <data name="Hex code" xml:space="preserve">
     <value>Hex kód</value>
   </data>
-  <data name="HideTrayIconMsg_Content" xml:space="preserve">
-    <value>Az ikon elrejtése nem ajánlott.
-Tényleg folytatni szeretné?</value>
-  </data>
-  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+  <data name="HideTrayIcon" xml:space="preserve">
     <value>Tálca ikon elrejtése</value>
   </data>
   <data name="Hotkeys" xml:space="preserve">
@@ -957,7 +953,7 @@ Jelenleg telepített verzió: {0}, új verzió: {1}</value>
     <value>Szín figyelmen kívül hagyása</value>
   </data>
   <data name="AccentSurfaces" xml:space="preserve">
-    <value>Accent Surfaces</value>
+    <value>Témaszínű elemek</value>
   </data>
   <data name="AccentSurfacesChoose" xml:space="preserve">
     <value>Válassza ki, hogy mikor legyen alkalmazva a témaszín</value>
@@ -969,7 +965,7 @@ Jelenleg telepített verzió: {0}, új verzió: {1}</value>
     <value>Témaszín alkalmazása a fejléceken és ablakkereteken</value>
   </data>
   <data name="AggressiveDwmRefresh" xml:space="preserve">
-    <value>More aggressive theme switch</value>
+    <value>Agresszívebb DWM frissítés</value>
   </data>
   <data name="OffsetTime_Header" xml:space="preserve">
     <value>Váltás elhalasztása valahány perccel</value>
@@ -978,11 +974,11 @@ Jelenleg telepített verzió: {0}, új verzió: {1}</value>
     <value>Pozitív értékek később, negatív értékek korábban</value>
   </data>
   <data name="AlwaysRefreshDwmMsg_Content" xml:space="preserve">
-    <value>Attempts to reduce wrong UI colors in the explorer, taskbar and start menu. If you experience this often, try to enable this setting.
+    <value>Megkísérli korrigálni a hibás felületi színeket a Fájlkezelőben, a tálcán és a Start menüben. Ha gyakran tapasztalja ezt a problémát, vagy zavarja a jelenség, próbálja meg bekapcsolni ezt a beállítást.
 
-This option works by executing the "try to fix the theme" option after each change.
+Bizonyos rendszereken enyhe vagy közepes lassulást okozhat témaváltás közben.
 
-Please note: This may introduce slight to moderate lag on some systems during theme switch. On rare occasions, Windows may emit a beeping sound when the mouse is moved during DWM refreshes.</value>
+Ritka esetekben előfordulhat, hogy a Windows sípoló hangot ad ki az egér mozgatásakor amíg a DWM frissül.</value>
   </data>
   <data name="AggressiveDwmRefreshMsg_Title" xml:space="preserve">
     <value>Agresszív DWM frissítés alkalmazása?</value>
@@ -1009,10 +1005,13 @@ Please note: This may introduce slight to moderate lag on some systems during th
     <value>Másolva</value>
   </data>
   <data name="AggressiveDWMRefreshDescription" xml:space="preserve">
-    <value>Attempts to reduce wrong UI colors in the explorer, taskbar and start menu by fixing the theme after every switch.</value>
+    <value>Megpróbálja csökkenteni a hibás felhasználói felület színeket a Fájlkezelőben, a tálcán és a Start menüben.</value>
   </data>
   <data name="OpenWindowsSettings" xml:space="preserve">
     <value>Windows beállítások megnyitása</value>
+  </data>
+  <data name="HotkeyInfoBarMessage" xml:space="preserve">
+    <value>A gyorsbillentyűk csak letiltva szerkeszthetők</value>
   </data>
   <data name="SelectedColor" xml:space="preserve">
     <value>Currently selected color</value>
@@ -1032,10 +1031,17 @@ Please note: This may introduce slight to moderate lag on some systems during th
   <data name="AccentApplyTaskbar" xml:space="preserve">
     <value>Témaszín a tálcán</value>
   </data>
-  <data name="ShowTrayIcon" xml:space="preserve">
-    <value>Show tray icon (recommended)</value>
+  <data name="PowerToysConflict_Content" xml:space="preserve">
+    <value>PowerToys Light Switch is active and may conflict with Auto Dark Mode. Disable it in PowerToys settings to avoid unexpected theme switching.</value>
   </data>
-  <data name="HotkeyInfoBarMessage" xml:space="preserve">
-    <value>A gyorsbillentyűk csak letiltva szerkeszthetők</value>
+  <data name="PowerToysConflict_Title" xml:space="preserve">
+    <value>PowerToys Light Switch detected</value>
+  </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>Az ikon elrejtése nem ajánlott.
+Tényleg folytatni szeretné?</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>Tálca ikon elrejtése</value>
   </data>
 </root>

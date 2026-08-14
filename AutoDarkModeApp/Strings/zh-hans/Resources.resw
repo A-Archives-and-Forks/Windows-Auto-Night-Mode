@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -364,11 +364,7 @@
   <data name="Hex code" xml:space="preserve">
     <value>十六进制颜色代码</value>
   </data>
-  <data name="HideTrayIconMsg_Content" xml:space="preserve">
-    <value>不建议隐藏托盘图标。
-您真的想继续吗？</value>
-  </data>
-  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+  <data name="HideTrayIcon" xml:space="preserve">
     <value>隐藏托盘图标</value>
   </data>
   <data name="Hotkeys" xml:space="preserve">
@@ -791,7 +787,7 @@
     <value>时间</value>
   </data>
   <data name="ToggleTheme" xml:space="preserve">
-    <value>启用主题</value>
+    <value>切换主题</value>
   </data>
   <data name="TraceMode" xml:space="preserve">
     <value>追踪模式</value>
@@ -959,7 +955,7 @@
     <value>标题栏和窗口边框的强调色</value>
   </data>
   <data name="AggressiveDwmRefresh" xml:space="preserve">
-    <value>More aggressive theme switch</value>
+    <value>更激进的 DWM 刷新</value>
   </data>
   <data name="OffsetTime_Header" xml:space="preserve">
     <value>延迟切换（分钟）</value>
@@ -968,11 +964,11 @@
     <value>正值代表延后，负值表示提前</value>
   </data>
   <data name="AlwaysRefreshDwmMsg_Content" xml:space="preserve">
-    <value>Attempts to reduce wrong UI colors in the explorer, taskbar and start menu. If you experience this often, try to enable this setting.
+    <value>尝试减少资源管理器、任务栏和开始菜单中错误 UI 颜色。如果你经常遇到这个问题或者被其困扰，请试着启用这个设置。
 
-This option works by executing the "try to fix the theme" option after each change.
+在主题切换时，部分电脑可能会有轻到中度的卡顿。
 
-Please note: This may introduce slight to moderate lag on some systems during theme switch. On rare occasions, Windows may emit a beeping sound when the mouse is moved during DWM refreshes.</value>
+在极少数情况下，在 DWM 刷新期间移动鼠标时，Windows 可能会发出蜂鸣声。</value>
   </data>
   <data name="AggressiveDwmRefreshMsg_Title" xml:space="preserve">
     <value>启用更激进的 DWM 刷新？</value>
@@ -999,10 +995,16 @@ Please note: This may introduce slight to moderate lag on some systems during th
     <value>已复制</value>
   </data>
   <data name="AggressiveDWMRefreshDescription" xml:space="preserve">
-    <value>Attempts to reduce wrong UI colors in the explorer, taskbar and start menu by fixing the theme after every switch.</value>
+    <value>尝试减少文件管理器、任务栏和开始菜单中错误的 UI 颜色。</value>
   </data>
   <data name="OpenWindowsSettings" xml:space="preserve">
     <value>打开 Windows 设置</value>
+  </data>
+  <data name="AccentApplyTaskbar" xml:space="preserve">
+    <value>任务栏主题色</value>
+  </data>
+  <data name="HotkeyInfoBarMessage" xml:space="preserve">
+    <value>快捷键只能在禁用状态下进行更改</value>
   </data>
   <data name="SelectedColor" xml:space="preserve">
     <value>选择的颜色</value>
@@ -1019,13 +1021,17 @@ Please note: This may introduce slight to moderate lag on some systems during th
   <data name="Preview" xml:space="preserve">
     <value>预览</value>
   </data>
-  <data name="AccentApplyTaskbar" xml:space="preserve">
-    <value>任务栏主题色</value>
+  <data name="PowerToysConflict_Content" xml:space="preserve">
+    <value>PowerToys Light Switch 处于活跃状态可能和 Auto Dark Mode 冲突。在 PowerToys 设置中禁用它避免意外的主题切换。</value>
   </data>
-  <data name="ShowTrayIcon" xml:space="preserve">
-    <value>Show tray icon (recommended)</value>
+  <data name="PowerToysConflict_Title" xml:space="preserve">
+    <value>检测到 PowerToys Light Switch</value>
   </data>
-  <data name="HotkeyInfoBarMessage" xml:space="preserve">
-    <value>快捷键只能在禁用状态下进行更改</value>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>不建议隐藏托盘图标。
+您真的想继续吗？</value>
+  </data>
+  <data name="HideTrayIconMsg_Title" xml:space="preserve">
+    <value>隐藏托盘图标</value>
   </data>
 </root>
