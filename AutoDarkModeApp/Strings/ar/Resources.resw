@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -208,10 +208,10 @@
     <value>اللون</value>
   </data>
   <data name="ColorFilter" xml:space="preserve">
-    <value>فلتر الألوان (يرسل Win + Ctrl + C)</value>
+    <value>تفعيل فلتر الألوان أثناء الوضع المظلم</value>
   </data>
   <data name="ColorizationPick_Description" xml:space="preserve">
-    <value>قم بتخصيص نظام ألوان نظام Windows حسب رغبتك.</value>
+    <value>قم بتخصيص نظام ألوان ويندوز حسب رغبتك.</value>
   </data>
   <data name="Conditions" xml:space="preserve">
     <value>الشروط</value>
@@ -367,12 +367,8 @@
   <data name="Hex code" xml:space="preserve">
     <value>رمز سداسي عشري</value>
   </data>
-  <data name="HideTrayIconMsg_Content" xml:space="preserve">
-    <value>Hiding the icon isn't recommended.
-Do you really want to continue?</value>
-  </data>
-  <data name="HideTrayIconMsg_Title" xml:space="preserve">
-    <value>Hide Tray Icon</value>
+  <data name="HideTrayIcon" xml:space="preserve">
+    <value>إخفاء أيقونة الدرج</value>
   </data>
   <data name="Hotkeys" xml:space="preserve">
     <value>مفاتيح التشغيل السريع</value>
@@ -492,7 +488,7 @@ Do you really want to continue?</value>
     <value>تنزيل التحديث</value>
   </data>
   <data name="Msg_IgnoreDisabled" xml:space="preserve">
-    <value>لا يدعم هذا الخيار نسق Windows الافتراضية</value>
+    <value>لا يدعم هذا الخيار سمات ويندوز الافتراضية المثبتة مسبقًا</value>
   </data>
   <data name="Msg_LocPerm" xml:space="preserve">
     <value>Auto Dark Mode needs the permission to access your location</value>
@@ -973,7 +969,7 @@ Do you really want to continue?</value>
     <value>Accent color for title bars and window borders</value>
   </data>
   <data name="AggressiveDwmRefresh" xml:space="preserve">
-    <value>More aggressive theme switch</value>
+    <value>Aggressive DWM refresh</value>
   </data>
   <data name="OffsetTime_Header" xml:space="preserve">
     <value>Delay switching by a number minutes</value>
@@ -982,11 +978,11 @@ Do you really want to continue?</value>
     <value>Positive values are later, negative values are earlier</value>
   </data>
   <data name="AlwaysRefreshDwmMsg_Content" xml:space="preserve">
-    <value>Attempts to reduce wrong UI colors in the explorer, taskbar and start menu. If you experience this often, try to enable this setting.
+    <value>Attempts to reduce wrong UI colors in the explorer, taskbar and start menu. If you experience this often or are bothered by it, try enabling this setting.
 
-This option works by executing the "try to fix the theme" option after each change.
+This may introduce slight to moderate lag on some systems during theme switch.
 
-Please note: This may introduce slight to moderate lag on some systems during theme switch. On rare occasions, Windows may emit a beeping sound when the mouse is moved during DWM refreshes.</value>
+On rare occasions, Windows may emit a beeping sound when the mouse is moved during DWM refreshes.</value>
   </data>
   <data name="AggressiveDwmRefreshMsg_Title" xml:space="preserve">
     <value>Use aggressive DWM refresh?</value>
@@ -1013,10 +1009,13 @@ Please note: This may introduce slight to moderate lag on some systems during th
     <value>Copied</value>
   </data>
   <data name="AggressiveDWMRefreshDescription" xml:space="preserve">
-    <value>Attempts to reduce wrong UI colors in the explorer, taskbar and start menu by fixing the theme after every switch.</value>
+    <value>Attempts to reduce wrong UI colors in the explorer, taskbar and start menu.</value>
   </data>
   <data name="OpenWindowsSettings" xml:space="preserve">
     <value>Open Windows settings</value>
+  </data>
+  <data name="HotkeyInfoBarMessage" xml:space="preserve">
+    <value>Hotkeys can only be changed while disabled</value>
   </data>
   <data name="SelectedColor" xml:space="preserve">
     <value>Currently selected color</value>
@@ -1036,7 +1035,14 @@ Please note: This may introduce slight to moderate lag on some systems during th
   <data name="AccentApplyTaskbar" xml:space="preserve">
     <value>Accent color for the taskbar</value>
   </data>
-  <data name="ShowTrayIcon" xml:space="preserve">
-    <value>Show tray icon (recommended)</value>
+  <data name="PowerToysConflict_Content" xml:space="preserve">
+    <value>PowerToys Light Switch is active and may conflict with Auto Dark Mode. Disable it in PowerToys settings to avoid unexpected theme switching.</value>
+  </data>
+  <data name="PowerToysConflict_Title" xml:space="preserve">
+    <value>PowerToys Light Switch detected</value>
+  </data>
+  <data name="HideTrayIconMsg_Content" xml:space="preserve">
+    <value>Hiding the icon isn't recommended.
+Do you really want to continue?</value>
   </data>
 </root>
