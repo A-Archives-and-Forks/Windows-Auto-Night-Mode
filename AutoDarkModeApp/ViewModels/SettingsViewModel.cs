@@ -112,7 +112,8 @@ public partial class SettingsViewModel : ObservableRecipient
         }
         catch (Exception ex)
         {
-            _errorService.ShowErrorMessage(ex, App.MainWindow.Content.XamlRoot, "SettingsViewModel");
+            // Awaited, otherwise Exit() below races the dialog away before it can be read.
+            await _errorService.ShowErrorMessage(ex, App.MainWindow.Content.XamlRoot, "SettingsViewModel");
         }
 
         MessageHandler.Client.SendMessageAndGetReply(Command.Restart);
@@ -120,7 +121,7 @@ public partial class SettingsViewModel : ObservableRecipient
         {
             UseShellExecute = false,
             Verb = "open",
-            ArgumentList = { App.RestartArgument, Environment.ProcessId.ToString(CultureInfo.InvariantCulture) },
+            ArgumentList = { App.RestartArgument },
         });
         Microsoft.UI.Xaml.Application.Current.Exit();
     }
