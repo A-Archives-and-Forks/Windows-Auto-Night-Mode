@@ -4,11 +4,11 @@
 
 Switches between the dark and light theme of Windows at scheduled times.
 
-<p href="https://hosted.weblate.org/engage/auto-dark-mode/">
+<a href="https://hosted.weblate.org/engage/auto-dark-mode/">
   <img src="https://hosted.weblate.org/widgets/auto-dark-mode/-/svg-badge.svg" alt="Translation status" />
-</p>
+</a>
 
-[Features](#features) • [Download](#download) • [Release Notes](https://github.com/AutoDarkMode/Windows-Auto-Night-Mode/releases) • [Wiki](https://github.com/AutoDarkMode/Windows-Auto-Night-Mode/wiki) • [Telegram Group](https://t.me/autodarkmode)
+[Features](#features) • [Download](#download) • [Release Notes](https://github.com/AutoDarkMode/Windows-Auto-Night-Mode/releases) • [Wiki](https://github.com/AutoDarkMode/Windows-Auto-Night-Mode/wiki) • [Telegram Group](https://t.me/autodarkmode) • [Website](https://autodarkmode.app/)
 
 # Auto Dark Mode
 
@@ -24,6 +24,7 @@ Because a simple design change would be too boring, Auto Dark Mode is packed wit
 ![Screenshot showing the System areas page of Auto Dark Mode](./assets/screenshot_systemareas.png)
 - Compatible with Windows 10* and Windows 11.
 - Theme switch based on sunrise and sunset.
+- Theme switch based on ambient light sensor
 - Postpone or delay the next switch as you like.
 - Desktop wallpaper switch.
 - Mouse cursor switch.
@@ -94,9 +95,8 @@ scoop install auto-dark-mode-np
 
 #### Installation
 
-Installation is pretty easy, as you only need to run the setup file provided as .exe. If you want to deploy Auto Dark Mode on multiple machines, you can use the argument _/allusers /verysilent_ to skip the installer window.
+Installation is pretty easy, as you only need to run the setup file provided as .exe. If you want to deploy Auto Dark Mode on multiple machines, you can use the argument _/allusers /verysilent_ to skip the installer window. Beware that the integrated updater doesn't support system-wide installations.
 <br> <br>
-Sometimes Windows or web browsers will show a security notice while downloading Auto Dark Mode. This is due to our lack of a developer license. You can ignore these messages.
 
 ## Translations
 
