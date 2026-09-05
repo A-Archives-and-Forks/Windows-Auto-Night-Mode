@@ -52,6 +52,17 @@ public sealed partial class ConditionsPage : Page
         }
     }
 
+    private void ProcessTokenizingTextBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput)
+            return;
+
+        sender.ItemsSource = ViewModel.ProcessListItemSource?
+            .Where(process => process.Contains(sender.Text, StringComparison.OrdinalIgnoreCase)
+                && ViewModel.ProcessBlockListItemSource?.Contains(process) != true)
+            .ToList();
+    }
+
     private void ProcessTokenizingTextBox_TokenItemChanged(CommunityToolkit.WinUI.Controls.TokenizingTextBox sender, object args)
     {
         if (ViewModel.ProcessBlockListItemSource == null)
