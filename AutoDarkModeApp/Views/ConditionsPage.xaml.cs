@@ -82,4 +82,10 @@ public sealed partial class ConditionsPage : Page
             _errorService.ShowErrorMessage(ex, App.MainWindow.Content.XamlRoot, "SwitchModesPage");
         }
     }
+
+    private async void ProcessTokenizingTextBox_TokenItemRemoved(CommunityToolkit.WinUI.Controls.TokenizingTextBox sender, object args)
+    {
+        ProcessTokenizingTextBox_TokenItemChanged(sender, args);
+        await BuildProcessListAsync();
+    }
 }

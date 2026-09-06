@@ -65,7 +65,7 @@
                                 TextChanged="ProcessTokenizingTextBox_TextChanged"
                                 TokenDelimiter=","
                                 TokenItemAdded="ProcessTokenizingTextBox_TokenItemChanged"
-                                TokenItemRemoved="ProcessTokenizingTextBox_TokenItemChanged" />
+                                TokenItemRemoved="ProcessTokenizingTextBox_TokenItemRemoved" />
                         </controls:SettingsCard>
                     </controls:SettingsExpander.Items>
 
