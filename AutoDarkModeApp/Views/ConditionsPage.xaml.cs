@@ -59,7 +59,7 @@ public sealed partial class ConditionsPage : Page
 
         sender.ItemsSource = ViewModel.ProcessListItemSource?
             .Where(process => process.Contains(sender.Text, StringComparison.OrdinalIgnoreCase)
-                && ViewModel.ProcessBlockListItemSource?.Contains(process) != true)
+                && ViewModel.ProcessBlockListItemSource?.Contains(process, StringComparer.OrdinalIgnoreCase) != true)
             .ToList();
     }
 
