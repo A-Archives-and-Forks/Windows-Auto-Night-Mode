@@ -52,6 +52,17 @@ public sealed partial class ConditionsPage : Page
         }
     }
 
+    private void ProcessTokenizingTextBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput)
+            return;
+
+        sender.ItemsSource = ViewModel.ProcessListItemSource?
+            .Where(process => process.Contains(sender.Text, StringComparison.OrdinalIgnoreCase)
+                && ViewModel.ProcessBlockListItemSource?.Contains(process, StringComparer.OrdinalIgnoreCase) != true)
+            .ToList();
+    }
+
     private void ProcessTokenizingTextBox_TokenItemChanged(CommunityToolkit.WinUI.Controls.TokenizingTextBox sender, object args)
     {
         if (ViewModel.ProcessBlockListItemSource == null)
@@ -70,5 +81,11 @@ public sealed partial class ConditionsPage : Page
         {
             _errorService.ShowErrorMessage(ex, App.MainWindow.Content.XamlRoot, "SwitchModesPage");
         }
+    }
+
+    private async void ProcessTokenizingTextBox_TokenItemRemoved(CommunityToolkit.WinUI.Controls.TokenizingTextBox sender, object args)
+    {
+        ProcessTokenizingTextBox_TokenItemChanged(sender, args);
+        await BuildProcessListAsync();
     }
 }
